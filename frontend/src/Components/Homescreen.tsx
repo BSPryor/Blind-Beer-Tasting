@@ -12,10 +12,5 @@ const Homescreen: React.FunctionComponent<IComponent> = (props) => {
 export default Homescreen;
 
 const StyledHome = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 2em;
-  margin: 0 auto;
+  padding-top: 100px;
 `;
