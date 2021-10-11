@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import AppContainer from "./Components/AppContainer";
 import Navbar from "./Components/Navbar";
 import routes from "./Config/routes";
 
@@ -15,24 +16,26 @@ const App: React.FunctionComponent<{}> = () => {
       <div>
         <Navbar name="Navbar" />
       </div>
-      <Switch>
-        {routes.map((route, index) => {
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              render={(props: RouteComponentProps<any>) => (
-                <route.component
-                  name={route.name}
-                  {...props}
-                  {...route.props}
-                />
-              )}
-            />
-          );
-        })}
-      </Switch>
+      <AppContainer>
+        <Switch>
+          {routes.map((route, index) => {
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                render={(props: RouteComponentProps<any>) => (
+                  <route.component
+                    name={route.name}
+                    {...props}
+                    {...route.props}
+                  />
+                )}
+              />
+            );
+          })}
+        </Switch>
+      </AppContainer>
     </BrowserRouter>
   );
 };
