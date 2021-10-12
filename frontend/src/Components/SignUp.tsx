@@ -1,8 +1,15 @@
+import React from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import IComponent from "../Interfaces/component";
 
 const SignUp: React.FunctionComponent<IComponent> = () => {
-  const handleSignUpSubmit = () => {};
+  const history = useHistory();
+
+  const handleSignUpSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    history.push("/");
+  };
 
   return (
     <SignUpStyled>
@@ -28,7 +35,7 @@ const SignUpStyled = styled.div`
   justify-content: center;
 `;
 
-const StyledForm = styled.div`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 `;

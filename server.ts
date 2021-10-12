@@ -1,12 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const cors = require("cors");
 const socket = require("socket.io");
 
 const router = require("./router");
 const passport = require("passport");
 
-mongoose.connect("mongodb://localhost/aaronnds");
+mongoose.connect("mongodb://localhost/blind-beer-tasting");
 
 const app = express();
 app.use(cors());
