@@ -1,5 +1,5 @@
 const passports = require("passport");
-const Authentication = require("./controllers/authentication.ts");
+const Authentication = require("./controllers/authentication");
 
 const requireSignin = passports.authenticate("local", { session: false });
 

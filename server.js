@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const socket = require("socket.io");
 
-const router = require("./routes.ts");
+const router = require("./routes");
 const passport = require("passport");
 
 mongoose.connect("mongodb://localhost/blind-beer-tasting");
