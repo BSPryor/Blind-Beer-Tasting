@@ -6,13 +6,22 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 import AppContainer from "./Components/AppContainer";
 import Navbar from "./Components/Navbar";
 import routes from "./Config/routes";
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #437f97;
+    color: #12A561;
+  }
+`;
+
 const App: React.FunctionComponent<{}> = () => {
   return (
     <BrowserRouter>
+      <GlobalStyle />
       <div>
         <Navbar name="Navbar" />
       </div>
