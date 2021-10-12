@@ -1,8 +1,10 @@
-const requireSignin = passport.authenticate("local", { session: false });
-const Authentication = require("./controllers/authentication");
+const passports = require("passport");
+const Authentication = require("./controllers/authentication.ts");
+
+const requireSignin = passports.authenticate("local", { session: false });
 
 module.exports = function (app) {
-  app.post("/auth/signin", requireSignin);
+  app.post("/auth/signin", requireSignin, Authentication.signin);
   app.post("/auth/signup", Authentication.signup);
   app.post("/auth/signout", Authentication.signout);
 };

@@ -1,5 +1,3 @@
-import user from "../models/user";
-
 const jwt = require("jwt-simple");
 
 const tokenForUser = (user) => {
@@ -12,13 +10,13 @@ const tokenForUser = (user) => {
   );
 };
 
-exports.signin = (req, res) => {
+const signin = (req, res) => {
   res.send({
     token: tokenForUser(req.user),
   });
 };
 
-exports.signup = function (req, res, next) {
+const signup = function (req, res, next) {
   const name = req.body.name;
   const password = req.body.password;
 
@@ -48,7 +46,7 @@ exports.signup = function (req, res, next) {
   });
 };
 
-exports.currentUser = function (req, res) {
+const currentUser = function (req, res) {
   const user = {
     name: req.user.name,
     token: tokenForUser(req.user),
@@ -57,7 +55,9 @@ exports.currentUser = function (req, res) {
   res.send(user);
 };
 
-exports.singout = (req, res) => {
+const singout = (req, res) => {
   req.logout();
   res.redirect("/");
 };
+
+export default { signin, signup, singout, currentUser };

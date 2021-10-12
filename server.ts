@@ -1,9 +1,9 @@
 const express = require("express");
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 const cors = require("cors");
 const socket = require("socket.io");
 
-const router = require("./router");
+const router = require("./routes.ts");
 const passport = require("passport");
 
 mongoose.connect("mongodb://localhost/blind-beer-tasting");
