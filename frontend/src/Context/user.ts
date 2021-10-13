@@ -1,4 +1,5 @@
 import axios from "axios";
+import React, { createContext } from "react";
 import IUser from "../Interfaces/user";
 
 export interface IUserState {
@@ -13,20 +14,43 @@ export interface IUserActions {
 }
 
 export const initialUserState: IUserState = {
-  user: { _id: "", name: "" },
+  user: { _id: "", name: "", password: "" },
 };
 
-export const useReducer = (state: IUserState, action: IUserActions) => {
+export const userReducer = (state: IUserState, action: IUserActions) => {
   let user = action.payload.user;
 
   switch (action.type) {
     case "signin":
-      axios.post("/auth/signin");
+      axios.post("/auth/signin", user).then(function (response: {}) {
+        console.log(response);
+      });
+      return state;
     case "signup":
-      axios.post("/auth/signup");
+      axios.post("/auth/signup", user).then(function (response: {}) {
+        console.log(response);
+      });
+      return state;
     case "signout":
-      axios.post("/auth/signout");
+      axios.post("/auth/signout", user).then(function (response: any) {
+        console.log(response);
+      });
+      return state;
     default:
       return state;
   }
 };
+
+export interface IUserContextProps {
+  userState: IUserState;
+  userDispatch: React.Dispatch<IUserActions>;
+}
+
+const UserContext = createContext<IUserContextProps>({
+  userState: initialUserState,
+  userDispatch: () => {},
+});
+
+export const UserContextConsumer = UserContext.Consumer;
+export const UserContextProvider = UserContext.Provider;
+export default UserContext;

@@ -1,9 +1,10 @@
 import IComponent from "../Interfaces/component";
+import BeerSearchBar from "./beerSearchBar";
 
 const CreateGame: React.FunctionComponent<IComponent> = (props) => {
   return (
     <div>
-      <input></input>
+      <BeerSearchBar name="BeerSearchBar" />
     </div>
   );
 };

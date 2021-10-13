@@ -26,7 +26,7 @@ export default Homescreen;
 const StyledHome = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 2em;
   margin: auto;
 `;

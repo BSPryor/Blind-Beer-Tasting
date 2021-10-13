@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter,
@@ -10,6 +10,13 @@ import { createGlobalStyle } from "styled-components";
 import AppContainer from "./Components/AppContainer";
 import Navbar from "./Components/Navbar";
 import routes from "./Config/routes";
+import UserContext, {
+  initialUserState,
+  UserContextProvider,
+  userReducer,
+} from "./Context/user";
+
+require("dotenv").config();
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,32 +26,41 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App: React.FunctionComponent<{}> = () => {
+  const [userState, userDispatch] = useReducer(userReducer, initialUserState);
+
+  const userContextValues = {
+    userState,
+    userDispatch,
+  };
+
   return (
     <BrowserRouter>
-      <GlobalStyle />
-      <div>
-        <Navbar name="Navbar" />
-      </div>
-      <AppContainer>
-        <Switch>
-          {routes.map((route, index) => {
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                render={(props: RouteComponentProps<any>) => (
-                  <route.component
-                    name={route.name}
-                    {...props}
-                    {...route.props}
-                  />
-                )}
-              />
-            );
-          })}
-        </Switch>
-      </AppContainer>
+      <UserContextProvider value={userContextValues}>
+        <GlobalStyle />
+        <div>
+          <Navbar name="Navbar" />
+        </div>
+        <AppContainer>
+          <Switch>
+            {routes.map((route, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  exact={route.exact}
+                  render={(props: RouteComponentProps<any>) => (
+                    <route.component
+                      name={route.name}
+                      {...props}
+                      {...route.props}
+                    />
+                  )}
+                />
+              );
+            })}
+          </Switch>
+        </AppContainer>
+      </UserContextProvider>
     </BrowserRouter>
   );
 };
