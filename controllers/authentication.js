@@ -1,6 +1,7 @@
 const jwt = require("jwt-simple");
+const User = require('../models/user')
 
-exports.tokenForUser = (user) => {
+const tokenForUser = (user) => {
   return jwt.encode(
     {
       sub: user._id,
@@ -10,7 +11,7 @@ exports.tokenForUser = (user) => {
   );
 };
 
-const signin = (req, res) => {
+exports.signin = function(req, res) {
   res.send({
     token: tokenForUser(req.user),
   });
@@ -34,7 +35,7 @@ exports.signup = function (req, res, next) {
     }
     const user = new User();
     user.name = name;
-    user.setPassword(password);
+    user.password = password;
 
     user.save(function (err, user) {
       if (err) {
@@ -55,7 +56,7 @@ exports.currentUser = function (req, res) {
   res.send(user);
 };
 
-exports.singout = (req, res) => {
+exports.signout = (req, res) => {
   req.logout();
   res.redirect("/");
 };
