@@ -11,8 +11,8 @@ const BeerSearchBar: React.FunctionComponent<IComponent> = (props) => {
     axios
       .get(`https://api.untappd.com/v4/search/beer`, {
         params: {
-          client_id: "2FCC00EDE92EA9E6B398B19EA530AC53135592B9",
-          client_secret: "511AF6F8646D71B1A7F92FB4A890E45870B46E58",
+          client_id: 
+          client_secret: 
           q: beerName,
         },
       })
