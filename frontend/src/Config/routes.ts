@@ -1,5 +1,6 @@
 import CreateGame from "../Components/CreateGame";
 import Homescreen from "../Components/Homescreen";
+import JoinGame from "../Components/JoinGame";
 import PlayGame from "../Components/PlayGame";
 import SignIn from "../Components/SignIn";
 import SignUp from "../Components/SignUp";
@@ -34,6 +35,12 @@ const routes: IRoute[] = [
     path: "/playgame",
     name: "Play Game",
     component: PlayGame,
+    exact: true,
+  },
+  {
+    path: "/joingame",
+    name: "Join Game",
+    component: JoinGame,
     exact: true,
   },
 ];

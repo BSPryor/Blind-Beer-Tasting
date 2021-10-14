@@ -14,7 +14,11 @@ export interface IUserActions {
 }
 
 export const initialUserState: IUserState = {
-  user: { _id: "", name: "", password: "" },
+  user: {
+    _id: "",
+    name: "",
+    authenticated: localStorage.getItem("token") || "",
+  },
 };
 
 export const userReducer = (state: IUserState, action: IUserActions) => {

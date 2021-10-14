@@ -17,7 +17,6 @@ exports.postBeer = (req, res) => {
     name: req.body.name,
     style: req.body.style,
     brewery: req.body.brewery,
-    flavor: req.body.flavor,
     game: req.game._id
   })
 

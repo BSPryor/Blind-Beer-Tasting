@@ -16,7 +16,9 @@ import UserContext, {
   userReducer,
 } from "./Context/user";
 
-require("dotenv").config();
+import * as dotenv from "dotenv";
+
+dotenv.config({ path: "../" });
 
 const GlobalStyle = createGlobalStyle`
   body {

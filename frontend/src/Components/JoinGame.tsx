@@ -1,10 +1,6 @@
 import Button from "../UILibrary/button";
 
-export interface IBeerResultsProps {
-  items: [{}];
-}
-
-const BeerSearchResult: React.FunctionComponent<any> = (props) => {
+const JoinGame: React.FunctionComponent<any> = (props) => {
   if (props.beers.length === 0) {
     return null;
   } else {
@@ -26,4 +22,4 @@ const BeerSearchResult: React.FunctionComponent<any> = (props) => {
   }
 };
 
-export default BeerSearchResult;
+export default JoinGame;
