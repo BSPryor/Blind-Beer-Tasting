@@ -7,8 +7,8 @@ import UserContext from "../Context/user";
 
 const Homescreen: React.FunctionComponent<IComponent> = (props) => {
   const user = useContext(UserContext);
-
-  if (!user.userState.user.authenticated) {
+  console.log(user.userState.user);
+  if (!user.userState.user.token) {
     return (
       <div>
         <StyledHome>

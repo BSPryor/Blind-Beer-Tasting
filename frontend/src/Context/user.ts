@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext } from "react";
+import { useHistory } from "react-router";
 import IUser from "../Interfaces/user";
 
 export interface IUserState {
@@ -15,31 +16,28 @@ export interface IUserActions {
 
 export const initialUserState: IUserState = {
   user: {
-    _id: "",
     name: "",
-    authenticated: localStorage.getItem("token") || "",
+    _id: "",
+    token: "",
   },
 };
 
-export const userReducer = (state: IUserState, action: IUserActions) => {
+export const userReducer = (
+  state: IUserState,
+  action: IUserActions
+): IUserState => {
   let user = action.payload.user;
 
   switch (action.type) {
     case "signin":
-      axios.post("/auth/signin", user).then(function (response: {}) {
-        console.log(response);
-      });
-      return state;
+      localStorage.setItem("token", user.token);
+      return { user };
     case "signup":
-      axios.post("/auth/signup", user).then(function (response: {}) {
-        console.log(response);
-      });
-      return state;
+      localStorage.setItem("token", user.token);
+      return { user };
     case "signout":
-      axios.post("/auth/signout", user).then(function (response: any) {
-        console.log(response);
-      });
-      return state;
+      localStorage.removeItem("token");
+      return { user };
     default:
       return state;
   }

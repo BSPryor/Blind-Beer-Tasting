@@ -11,11 +11,19 @@ const tokenForUser = (user) => {
   );
 };
 
-exports.signin = function(req, res) {
-  res.send({
-    token: tokenForUser(req.user),
-  });
-};
+exports.signin = function(req, res, next) {
+  const name = req.body.name;
+
+  User.findOne({ name: name }, function (err, user) {
+    if (err) {
+      return next(err);
+    } else {
+
+      const person = {name:name, _id: user._id, token: tokenForUser(req.user)}
+      res.send(person);
+    }
+  })
+}
 
 exports.signup = function (req, res, next) {
   const name = req.body.name;
@@ -42,7 +50,7 @@ exports.signup = function (req, res, next) {
         return next(err);
       }
 
-      res.json({ token: tokenForUser(user) });
+      res.json({name: user.name, _id: user._id, token: tokenForUser(user) });
     });
   });
 };

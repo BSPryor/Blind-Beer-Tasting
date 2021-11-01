@@ -1,37 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import IComponent from "../Interfaces/component";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { BeerOutline } from "react-ionicons";
+import UserContext, { initialUserState } from "../Context/user";
 
 const Navbar: React.FunctionComponent<IComponent> = (props) => {
+  const user = useContext(UserContext);
+
+  const handleSignOut = function () {
+    user.userDispatch({ type: "signout", payload: initialUserState });
+  };
+
   const renderLinks = () => {
-    // if (authenticated) {
-    //   return (
-    //     <React.Fragment>
-    //       <Link to="/">
-    //         <li>Watch List: {watchListCount}</li>
-    //       </Link>
-    //       <li>{email}</li>
-    //       <li>
-    //         <LinkButton href="#" onClick={handleSignOutClick}>
-    //           Sign Out
-    //         </LinkButton>
-    //       </li>
-    //     </React.Fragment>
-    //   );
-    // } else {
-    return (
-      <React.Fragment>
-        <Navli>
-          <StyledLink to="/signup">Sign Up</StyledLink>
-        </Navli>
-        <Navli>
-          <StyledLink to="/signin">Sign In</StyledLink>
-        </Navli>
-      </React.Fragment>
-    );
-    // }
+    if (user.userState.user.token) {
+      return (
+        <React.Fragment>
+          <Navli>
+            <StyledLink to="/" onClick={handleSignOut}>
+              Signout
+            </StyledLink>
+          </Navli>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <Navli>
+            <StyledLink to="/signup">Sign Up</StyledLink>
+          </Navli>
+          <Navli>
+            <StyledLink to="/signin">Sign In</StyledLink>
+          </Navli>
+        </React.Fragment>
+      );
+    }
   };
 
   return (
