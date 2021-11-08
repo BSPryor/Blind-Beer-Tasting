@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
-import IComponent from "../Interfaces/component";
 import transformBeerData from "../Services/beerDataTransform";
 import Button from "../UILibrary/button";
 import BeerSearchResult from "./beerSearchResult";
 
-const BeerSearchBar: React.FunctionComponent<IComponent> = (props) => {
+export interface IBeerSearchBar {
+  gameId: number;
+}
+
+const BeerSearchBar: React.FunctionComponent<IBeerSearchBar> = (props) => {
   const [beerName, setBeerName] = useState<string>("");
   const [searchResults, setSearchResults] = useState<[]>([]);
 
@@ -33,7 +36,7 @@ const BeerSearchBar: React.FunctionComponent<IComponent> = (props) => {
         onChange={(e: any) => setBeerName(e.target.value)}
       ></input>
       <Button onClick={handleSearch}>Search for a beer</Button>
-      <BeerSearchResult beers={searchResults} />
+      <BeerSearchResult beers={searchResults} gameId={props.gameId} />
     </div>
   );
 };

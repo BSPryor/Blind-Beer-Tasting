@@ -1,6 +1,5 @@
-import axios from "axios";
 import React, { createContext } from "react";
-import { useHistory } from "react-router";
+
 import IUser from "../Interfaces/user";
 
 export interface IUserState {

@@ -13,15 +13,16 @@ exports.postBeer = (req, res) => {
     res.status(400).send("Missing beer information")
     return res.end();
   }
+
   let beer = new Beer({
     name: req.body.name,
     style: req.body.style,
     brewery: req.body.brewery,
-    game: req.game._id
+    game: req.params.game
   })
 
   req.game.beers.push(beer)
-  req.board.save()
+  req.game.save()
   beer.save()
   req.app.get('io').emit('newBeer', beer);
   res.status(200).send(beer)

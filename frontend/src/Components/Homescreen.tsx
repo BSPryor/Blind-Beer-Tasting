@@ -35,7 +35,7 @@ const Homescreen: React.FunctionComponent<IComponent> = (props) => {
             <Button>Create New Game</Button>
           </Link>
           <Link to="/playgame">
-            <Button>Start Game</Button>
+            <Button>Edit Game</Button>
           </Link>
           <Link to="/joingame">
             <Button>Join Game</Button>

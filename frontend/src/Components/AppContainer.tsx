@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import IComponent from "../Interfaces/component";
 
 const AppContainer: React.FunctionComponent = (props) => {
   return <StyledContainer>{props.children}</StyledContainer>;

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import IComponent from "../Interfaces/component";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
 import { BeerOutline } from "react-ionicons";
 import UserContext, { initialUserState } from "../Context/user";
