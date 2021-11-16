@@ -5,6 +5,7 @@ import styled from "styled-components";
 import UserContext from "../Context/user";
 import IComponent from "../Interfaces/component";
 import Button from "../UILibrary/button";
+import Input from "../UILibrary/input";
 
 const SignUp: React.FunctionComponent<IComponent> = () => {
   const history = useHistory();
@@ -46,11 +47,11 @@ const SignUp: React.FunctionComponent<IComponent> = () => {
       <StyledForm>
         <StyledInputGroup className="form-group">
           <StyledLabel>Name</StyledLabel>
-          <input name="name" onChange={nameFieldInputHandler}></input>
+          <Input name="name" onChange={nameFieldInputHandler}></Input>
         </StyledInputGroup>
         <StyledInputGroup className="form-group">
           <StyledLabel>Password</StyledLabel>
-          <input name="password" onChange={passwordFieldInputHandler}></input>
+          <Input name="password" onChange={passwordFieldInputHandler}></Input>
         </StyledInputGroup>
         <Button type="submit" onClick={handleSignUpSubmit}>
           Submit
@@ -78,8 +79,10 @@ const StyledInputGroup = styled.div`
   justify-content: flex-start;
   font-size: 2em;
   padding: 0.5em;
+  align-items: center;
 `;
 
 const StyledLabel = styled.label`
+  font-size: 30px;
   margin: 0 1em;
 `;

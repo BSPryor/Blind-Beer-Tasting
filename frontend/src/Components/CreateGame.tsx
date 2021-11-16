@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import IComponent from "../Interfaces/component";
 import Button from "../UILibrary/button";
+import Input from "../UILibrary/input";
+import StyledForm from "../UILibrary/styledForm";
 import BeerSearchBar from "./beerSearchBar";
 
 const CreateGame: React.FunctionComponent<IComponent> = () => {
@@ -16,7 +18,6 @@ const CreateGame: React.FunctionComponent<IComponent> = () => {
     axios
       .post("http://localhost:5000/games", { name: gameName })
       .then(function (response: any) {
-        console.log(response.data);
         setGameId(response.data._id);
       });
   };
@@ -29,11 +30,11 @@ const CreateGame: React.FunctionComponent<IComponent> = () => {
     );
   } else {
     return (
-      <div>
+      <StyledForm>
         <h2>Name your game!</h2>
-        <input name="gameName" onChange={gameNameInputHandler}></input>
+        <Input name="gameName" onChange={gameNameInputHandler}></Input>
         <Button onClick={handleGameCreation}>Submit Name</Button>
-      </div>
+      </StyledForm>
     );
   }
 };

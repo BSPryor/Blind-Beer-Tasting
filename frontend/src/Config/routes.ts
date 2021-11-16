@@ -1,6 +1,6 @@
 import CreateGame from "../Components/CreateGame";
+import EditGame from "../Components/EditGame";
 import Homescreen from "../Components/Homescreen";
-import JoinGame from "../Components/JoinGame";
 import PlayGame from "../Components/PlayGame";
 import SignIn from "../Components/SignIn";
 import SignUp from "../Components/SignUp";
@@ -38,9 +38,9 @@ const routes: IRoute[] = [
     exact: true,
   },
   {
-    path: "/joingame",
-    name: "Join Game",
-    component: JoinGame,
+    path: "/editgame",
+    name: "Edit Game",
+    component: EditGame,
     exact: true,
   },
 ];

@@ -5,7 +5,13 @@ const transformBeerData = (response: any) => {
   return beers.map((beer: any) => {
     return {
       name: beer.beer.beer_name,
-      style: beer.beer.beer_style,
+      style: beer.beer.beer_style
+        .split("-")
+        .join(",")
+        .split("/")
+        .join(",")
+        .split(",")
+        .join(""),
       id: beer.beer.bid,
       brewery: beer.brewery.brewery_name,
     };

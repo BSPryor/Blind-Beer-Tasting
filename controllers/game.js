@@ -37,3 +37,16 @@ exports.postGame = (req, res) => {
     res.status(200).send(game);
   })
 };
+
+exports.getGameByName = (req, res) => {
+  if (!req.query.name) {
+    res.status(400).send("No name included in request body")
+    return res.end();
+  }
+  Game.findOne({name: req.query.name})
+  .populate("beers")
+    .exec((err, game) => {
+      if(err) return next(err);
+      res.status(200).json(game);
+    })
+};

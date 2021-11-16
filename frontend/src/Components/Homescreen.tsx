@@ -7,7 +7,8 @@ import UserContext from "../Context/user";
 
 const Homescreen: React.FunctionComponent<IComponent> = (props) => {
   const user = useContext(UserContext);
-  console.log(user.userState.user);
+  if (localStorage.token) {
+  }
   if (!user.userState.user.token) {
     return (
       <div>
@@ -34,10 +35,10 @@ const Homescreen: React.FunctionComponent<IComponent> = (props) => {
           <Link to="/creategame">
             <Button>Create New Game</Button>
           </Link>
-          <Link to="/playgame">
-            <Button>Edit Game</Button>
+          <Link to="/editgame">
+            <Button>My Games</Button>
           </Link>
-          <Link to="/joingame">
+          <Link to="/playgame">
             <Button>Join Game</Button>
           </Link>
         </StyledHome>
@@ -51,7 +52,7 @@ export default Homescreen;
 const StyledHome = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   padding: 2em;
   margin: auto;
 `;

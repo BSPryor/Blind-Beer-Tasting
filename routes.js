@@ -35,6 +35,7 @@ module.exports = function(app) {
   app.post('/auth/signup', Authentication.signup);
   app.post('/auth/signout', Authentication.signout);
 
+  app.get('/game', Game.getGameByName)
   app.get('/games', Game.getGames);
   app.get('/games/:game', Game.getGame);
   app.post('/games', Game.postGame)

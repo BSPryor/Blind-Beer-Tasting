@@ -1,8 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import transformBeerData from "../Services/beerDataTransform";
 import Button from "../UILibrary/button";
+import Input from "../UILibrary/input";
+import StyledForm from "../UILibrary/styledForm";
 import BeerSearchResult from "./beerSearchResult";
+import EditGameView from "./editGameView";
 
 export interface IBeerSearchBar {
   gameId: number;
@@ -11,6 +14,7 @@ export interface IBeerSearchBar {
 const BeerSearchBar: React.FunctionComponent<IBeerSearchBar> = (props) => {
   const [beerName, setBeerName] = useState<string>("");
   const [searchResults, setSearchResults] = useState<[]>([]);
+  const [game, setGame] = useState({});
 
   const handleSearch = function () {
     axios
@@ -27,16 +31,33 @@ const BeerSearchBar: React.FunctionComponent<IBeerSearchBar> = (props) => {
       });
   };
 
+  const handleGameFetch = function (gameId: number) {
+    axios
+      .get(`http://localhost:5000/games/${gameId}`)
+      .then(function (response: any) {
+        setGame(response.data);
+      });
+  };
+
+  useEffect(() => handleGameFetch(props.gameId), [props.gameId]);
+
   return (
     <div>
-      <input
-        type="text"
-        id="query"
-        placeholder="Search Beer"
-        onChange={(e: any) => setBeerName(e.target.value)}
-      ></input>
-      <Button onClick={handleSearch}>Search for a beer</Button>
-      <BeerSearchResult beers={searchResults} gameId={props.gameId} />
+      <StyledForm>
+        <Input
+          type="text"
+          id="query"
+          placeholder="Search Beer"
+          onChange={(e: any) => setBeerName(e.target.value)}
+        ></Input>
+        <Button onClick={handleSearch}>Search for a beer</Button>
+      </StyledForm>
+      <BeerSearchResult
+        beers={searchResults}
+        gameId={props.gameId}
+        handleGameFetch={handleGameFetch}
+      />
+      <EditGameView game={game} />
     </div>
   );
 };
