@@ -8,6 +8,7 @@ const app = express();
 const passportService = require('./services/passport')
 
 const Games = require('./models/game')
+const Users = require('./models/user')
 
 const requireSignin = passport.authenticate("local", { session: false });
 
@@ -19,7 +20,7 @@ module.exports = function(app) {
     })
     .exec((err, game) => {
       if(!game) {
-        res.writeHead(404, 'Game not found'); // Send 404 if the board isn't found
+        res.writeHead(404, 'Game not found'); 
         return res.end();
       }
       else if (err)
@@ -27,6 +28,19 @@ module.exports = function(app) {
       else
         req.game = game; 
       next();
+    })
+  })
+
+  app.param('user', (req, res, next, id)=> {
+    Users.findById(id).exec((err, user) => {
+      if(!user){
+        res.writeHead(404, 'User not found'); 
+        return res.end();
+      }  else if (err) {
+        throw err;
+      } else
+      req.user = user; 
+    next();
     })
   })
 
@@ -42,4 +56,7 @@ module.exports = function(app) {
 
   app.get('/games/:game/beers', Beer.getBeers);
   app.post('/games/:game/beers', Beer.postBeer);
+
+  app.post('/games/:game/:user/score', Score.postScore);
+  app.get('/games/:game/score', Score.getScore)
 };
