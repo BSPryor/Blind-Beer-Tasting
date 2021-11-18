@@ -14,17 +14,11 @@ const GameCard: React.FunctionComponent<IGameCardProps> = (props) => {
   const [styleSelection, setStyleSelection] = useState<string>("");
   const [brewerySelection, setBrewerySelection] = useState<string>("");
 
-  function shuffleArray(array: string[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
-  useEffect(() => {
-    shuffleArray(props.styleChoices);
-    shuffleArray(props.breweryChoices);
-  });
+  const handleSubmitAnswersClick = () => {
+    props.check(brewerySelection, styleSelection);
+    setStyleSelection("");
+    setBrewerySelection("");
+  };
 
   return (
     <GCard>
@@ -59,9 +53,7 @@ const GameCard: React.FunctionComponent<IGameCardProps> = (props) => {
           );
         })}
       </AnswerArea>
-      <Button onClick={() => props.check(brewerySelection, styleSelection)}>
-        Submit Answers
-      </Button>
+      <Button onClick={handleSubmitAnswersClick}>Submit Answers</Button>
     </GCard>
   );
 };

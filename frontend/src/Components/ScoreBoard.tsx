@@ -1,31 +1,35 @@
+import styled from "styled-components";
+import StyledForm from "../UILibrary/styledForm";
+import ScoreBoardRow from "./ScoreBoardRow";
+
 export interface IScoreBoard {
   gameData: any;
 }
 const ScoreBoard: React.FunctionComponent<IScoreBoard> = (props) => {
   console.log(props.gameData);
   return (
-    <div>
-      <table>
-        <tr>
+    <StyledForm>
+      <ScoreTable>
+        <TableRow>
           <th>Name</th>
-          <th>Scores</th>
+
           <th>Total</th>
-        </tr>
-        <tr>
-          <td>{props.gameData[0].user.name}</td>
-          <td>{props.gameData[0].score}</td>
-          <td>
-            {props.gameData[0].score.reduce((a: number, b: number) => a + b)}
-          </td>
-        </tr>
-        <tr>
-          <td>16</td>
-          <td>14</td>
-          <td>10</td>
-        </tr>
-      </table>
-    </div>
+        </TableRow>
+        {props.gameData.map((rD: any) => (
+          <ScoreBoardRow key={rD._id} rowData={rD} />
+        ))}
+      </ScoreTable>
+    </StyledForm>
   );
 };
 
 export default ScoreBoard;
+
+const ScoreTable = styled.table`
+  font-size: 32px;
+  border: 4px solid #2d3047;
+  border-radius: 4px;
+`;
+const TableRow = styled.tr`
+  border: 4px solid #2d3047;
+`;

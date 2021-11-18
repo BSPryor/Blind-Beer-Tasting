@@ -15,6 +15,18 @@ const Game: React.FunctionComponent<IPlayGame> = (props) => {
   const [gameData, setGameData] = useState<any>();
   const context = useContext(UserContext);
   const uid = context.userState.user._id;
+
+  function shuffleArray(array: string[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  const uniq = function (a: string[]) {
+    return Array.from(new Set(a));
+  };
+
   useEffect(() => {
     if (props.beers.length < 6) {
       let choices = [
@@ -29,7 +41,9 @@ const Game: React.FunctionComponent<IPlayGame> = (props) => {
       props.beers.map((beer) => {
         return choices.push(beer.style);
       });
-      setAnswerChoices(choices);
+      const newc = uniq(choices);
+      shuffleArray(newc);
+      setAnswerChoices(newc);
 
       let bchoice = [
         "Dogfish Head Craft Brewery",
@@ -42,18 +56,25 @@ const Game: React.FunctionComponent<IPlayGame> = (props) => {
       props.beers.map((beer) => {
         return bchoice.push(beer.brewery);
       });
-      setBreweryChoices(bchoice);
+      const newb = uniq(bchoice);
+      shuffleArray(newb);
+      setBreweryChoices(newb);
     } else {
       let choices: string[] = [];
       props.beers.map((beer) => {
         return choices.push(beer.style);
       });
-      setAnswerChoices(choices);
+      const newc = uniq(choices);
+      shuffleArray(newc);
+      setAnswerChoices(newc);
+
       let bchoice: string[] = [];
       props.beers.map((beer) => {
         return bchoice.push(beer.brewery);
       });
-      setBreweryChoices(bchoice);
+      const newb = uniq(bchoice);
+      shuffleArray(newb);
+      setBreweryChoices(newb);
     }
     setLoading(false);
   }, [props.beers]);
@@ -61,14 +82,12 @@ const Game: React.FunctionComponent<IPlayGame> = (props) => {
   const checkAnswer = (bs: string, ss: string) => {
     const correct = props.beers[number].brewery;
     if (correct === bs) {
-      console.log("correct!");
       score.push(1);
     } else {
       score.push(0);
     }
     const correctS = props.beers[number].style;
     if (correctS === ss) {
-      console.log("correct style");
       score.push(2);
     } else {
       score.push(0);
@@ -96,7 +115,6 @@ const Game: React.FunctionComponent<IPlayGame> = (props) => {
     }
   };
 
-  console.log(number);
   return (
     <div>
       {number > 0 ? <p>{score.reduce((a, b) => a + b)}</p> : null}

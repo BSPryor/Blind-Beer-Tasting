@@ -33,7 +33,7 @@ const BeerSearchBar: React.FunctionComponent<IBeerSearchBar> = (props) => {
 
   const handleGameFetch = function (gameId: number) {
     axios
-      .get(`http://localhost:5000/games/${gameId}`)
+      .get(`http://localhost:5000/game/${gameId}`)
       .then(function (response: any) {
         setGame(response.data);
       });

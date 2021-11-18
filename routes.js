@@ -11,6 +11,7 @@ const Games = require('./models/game')
 const Users = require('./models/user')
 
 const requireSignin = passport.authenticate("local", { session: false });
+const requireAuth = passport.authenticate('jwt', { session: false });
 
 module.exports = function(app) {
   app.param('game', (req, res, next, id) => {
@@ -48,15 +49,16 @@ module.exports = function(app) {
   app.post('/auth/signin', requireSignin, Authentication.signin);
   app.post('/auth/signup', Authentication.signup);
   app.post('/auth/signout', Authentication.signout);
+  app.get('/auth/current_user', requireAuth, Authentication.currentUser);
 
-  app.get('/game', Game.getGameByName)
-  app.get('/games', Game.getGames);
-  app.get('/games/:game', Game.getGame);
-  app.post('/games', Game.postGame)
+  app.get('/game', Game.getGameByName);
+  app.get('/games/:user', Game.getGames);
+  app.get('/game/:game', Game.getGame);
+  app.post('/games/:user', Game.postGame);
 
   app.get('/games/:game/beers', Beer.getBeers);
   app.post('/games/:game/beers', Beer.postBeer);
 
   app.post('/games/:game/:user/score', Score.postScore);
-  app.get('/games/:game/score', Score.getScore)
+  app.get('/games/:game/score', Score.getScore);
 };
