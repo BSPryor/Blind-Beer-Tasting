@@ -3,6 +3,7 @@ export interface IGameView {
 }
 
 const EditGameView: React.FunctionComponent<IGameView> = (props) => {
+  console.log(props.game);
   if (props.game.beers) {
     return (
       <div>

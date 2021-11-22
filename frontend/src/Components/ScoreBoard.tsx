@@ -6,7 +6,6 @@ export interface IScoreBoard {
   gameData: any;
 }
 const ScoreBoard: React.FunctionComponent<IScoreBoard> = (props) => {
-  console.log(props.gameData);
   return (
     <StyledForm>
       <ScoreTable>

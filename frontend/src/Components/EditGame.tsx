@@ -4,7 +4,7 @@ import styled from "styled-components";
 import UserContext from "../Context/user";
 import IComponent from "../Interfaces/component";
 import Button from "../UILibrary/button";
-import StyledForm from "../UILibrary/styledForm";
+
 import ScoreBoard from "./ScoreBoard";
 
 const EditGame: React.FunctionComponent<IComponent> = (props) => {
@@ -14,9 +14,9 @@ const EditGame: React.FunctionComponent<IComponent> = (props) => {
   const [gD, setGD] = useState<any>();
   const context = useContext(UserContext);
   const uid = context.userState.user._id;
+
   useEffect(() => {
     axios.get(`http://localhost:5000/games/${uid}`).then((response: any) => {
-      console.log(response.data);
       setGameList(response.data);
       setLoading(false);
     });

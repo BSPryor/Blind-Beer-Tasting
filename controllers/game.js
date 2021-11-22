@@ -2,19 +2,19 @@ const Game = require('../models/game');
 const User = require('../models/user')
 
 exports.getGames = (req, res) => {
-  console.log(req.user)
   Game.find({user: req.user._id})
   .exec((err, games) => {
     res.status(200).json(games)
   })
 }
 
-exports.getGame = (req, res) => {
-  console.log(req.user)
-  Game.find({user: req.user._id})
-  .exec((err, games) => {
-    res.status(200).json(games)
-  })
+exports.getGame = (req, res) => { 
+  Game.findOne({_id: req.game._id})
+    .populate("beers")
+    .exec((err, games) => {
+      if(err) return next(err);
+      res.status(200).json(games);
+    })
 }
 
 exports.postGame = (req, res) => {

@@ -10,8 +10,6 @@ export interface IBeerResultsProps {
 }
 
 const BeerSearchResult: React.FunctionComponent<any> = (props) => {
-  console.log(props.beers[1]);
-
   const handleBeerAdd = function (e: any) {
     const gi = props.gameId;
     axios

@@ -32,8 +32,6 @@ const SignUp: React.FunctionComponent<IComponent> = () => {
     axios
       .post("http://localhost:5000/auth/signup", user)
       .then(function (response: any) {
-        console.log(response.data);
-
         context.userDispatch({
           type: "signup",
           payload: { user: response.data },

@@ -10,7 +10,7 @@ import { createGlobalStyle } from "styled-components";
 import AppContainer from "./Components/AppContainer";
 import Navbar from "./Components/Navbar";
 import routes from "./Config/routes";
-import UserContext, {
+import {
   initialUserState,
   UserContextProvider,
   userReducer,

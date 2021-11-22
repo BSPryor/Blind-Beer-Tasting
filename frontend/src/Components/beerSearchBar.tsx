@@ -15,6 +15,7 @@ const BeerSearchBar: React.FunctionComponent<IBeerSearchBar> = (props) => {
   const [beerName, setBeerName] = useState<string>("");
   const [searchResults, setSearchResults] = useState<[]>([]);
   const [game, setGame] = useState({});
+  const [vg, setVG] = useState(true);
 
   const handleSearch = function () {
     axios
@@ -38,7 +39,6 @@ const BeerSearchBar: React.FunctionComponent<IBeerSearchBar> = (props) => {
         setGame(response.data);
       });
   };
-
   useEffect(() => handleGameFetch(props.gameId), [props.gameId]);
 
   return (
