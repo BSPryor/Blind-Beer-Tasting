@@ -5,7 +5,7 @@ const Beer = require("./controllers/beer")
 const Score = require("./controllers/score")
 const express = require("express");
 const app = express();
-const passportService = require('./services/passport')
+const passportService = require('./Backend/services/passport')
 
 const Games = require('./models/game')
 const Users = require('./models/user')

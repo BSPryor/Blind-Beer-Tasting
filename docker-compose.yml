@@ -1,0 +1,32 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: blind-beer-tasting
+      MONGO_INITDB_ROOT_PASSWORD: password
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+  api:
+    build:
+      dockerfile: dockerfile
+      context: "./Backend"
+    volumes:
+      - /app/node_modules
+      - ./Backend:/app
+  client:
+    build:
+      dockerfile: dockerfile
+      context: "./frontend"
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
